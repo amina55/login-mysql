@@ -36,7 +36,7 @@ try{
                         $statement = $connection->prepare($updateQuery);
                         $statement->execute(['salt' => $hashedSalt, 'password' => $hashedPassword, 'id' => $user['id']]);
                         $_SESSION['logged_in'] = $userName;
-                        header('Location: welcome.php');
+                        echo '<script>window.location = "welcome.php";</script>';
                         exit();
                     } else {
                         $message = "<p class='error'>Your given password is incorrect</p>";

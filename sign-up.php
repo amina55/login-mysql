@@ -48,7 +48,8 @@ try{
                             if (!$result) {
                                 $message = "<p class='error'>Error in User Sign up</p>";
                             } else {
-                                $message = "<div class='alert alert-success'>Successfully User Registered.</div>";
+                                echo '<script>window.location = "login.php";</script>';
+                                exit();
                             }
                         } else {
                             $message = "<p class='error'>Username or Email should be unique. Please enter unique ".$repeat."</p>";
@@ -91,16 +92,18 @@ include "master.php" ?>
                     valid = false;
                 }
             }
-            if(confirm_password != password) {
-                $("#confirm_password").css('background-color', '#FFFFDF');
-                $("#password").css('background-color', '#FFFFDF');
-                $("#signup-status").html('<p class="error">Please verify Password and Confirm Password.</p>');
-                valid = false;
-            } else if (password_length < 6 || password_length > 20) {
-                $("#password").css('background-color', '#FFFFDF');
-                $('#password-error').html('Password should be atleast 6 character');
-                $("#signup-status").html('<p class="error">Password length should be 6-20 characters.</p>');
-                valid = false;
+            if(valid) {
+                if(confirm_password != password) {
+                    $("#confirm_password").css('background-color', '#FFFFDF');
+                    $("#password").css('background-color', '#FFFFDF');
+                    $("#signup-status").html('<p class="error">Please verify Password and Confirm Password.</p>');
+                    valid = false;
+                } else if (password_length < 6 || password_length > 20) {
+                    $("#password").css('background-color', '#FFFFDF');
+                    $('#password-error').html('Password should be atleast 6 character');
+                    $("#signup-status").html('<p class="error">Password length should be 6-20 characters.</p>');
+                    valid = false;
+                }
             }
             return valid;
         }
