@@ -7,7 +7,7 @@ if(!empty($_SESSION['logged_in'])) {
 $message = '';
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
 try{
-    if ($_POST["captcha"] == $_SESSION["captcha_code"]) {
+   /* if ($_POST["captcha"] == $_SESSION["captcha_code"]) {*/
         $userName = trim($_POST['username']);
         $password = trim($_POST['password']);
         if (empty($userName) || empty($password)) {
@@ -45,9 +45,9 @@ try{
                 }
             }
         }
-    } else {
+    /*} else {
         $message = "<p class='error'>Enter Correct Captcha Code.</p>";
-    }
+    }*/
 }catch (Exception $e) {
     $message = "<p class='error'>Error : " . $e->getMessage() . "</p>";
 }
@@ -66,7 +66,7 @@ try{
         function validateContact() {
             var valid = true;
             $(".demoInputBox").css('background-color', 'white');
-            var inputs = ['username', 'password', 'captcha'];
+            var inputs = ['username', 'password'];
             $("#login-status").html('');
             for (var i = 0; i < inputs.length ; i++) {
                 if (!$("#" + inputs[i]).val()) {
@@ -111,7 +111,7 @@ try{
                     <span class="error-message"></span>
                 </div>
             </div>
-            <div class="form-group ">
+            <!--<div class="form-group ">
                 <div class="col-sm-12">
                     <label class="control-label mb10" for="captcha">
                         Captcha
@@ -120,8 +120,8 @@ try{
                     <input id="captcha" class="form-control" placeholder="Captcha" name="captcha" type="password" value="" required>
                 </div>
             </div>
-
-            <?php include "captcha.php" ?>
+-->
+            <?php /*include "captcha.php" */?>
             <div class="form-group" style="margin-bottom: 40px;">
                 <div class="col-sm-12">
                     <input type="button" class="btn btn-global btn-global-thin text-uppercase" onclick="sendContact()" value="Log In">
