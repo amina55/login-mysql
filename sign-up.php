@@ -44,7 +44,7 @@ try{
                             $hashedSalt = encrypt_decrypt('encrypt', $salt);
                             $insertQuery = "INSERT INTO users (name, username, email, password, salt) VALUES  (:name, :username, :email, :password, :salt)";
                             $statement = $connection->prepare($insertQuery);
-                            $result = $statement->execute(['name' => $name, 'username' => $username, 'email' => $email, 'password' => $hashedPassword, 'salt' => $hashedSalt]);
+                            $result = $statement->execute(array('name' => $name, 'username' => $username, 'email' => $email, 'password' => $hashedPassword, 'salt' => $hashedSalt));
                             if (!$result) {
                                 $message = "<p class='error'>Error in User Sign up</p>";
                             } else {
