@@ -18,7 +18,7 @@ try{
             if (!$connection) {
                 $message = "<p class='error'>Connection Failed.</p>";
             } else {
-                $stmt = $connection->prepare('SELECT id, username, password, salt FROM users WHERE username = :username');
+                $stmt = $connection->prepare('SELECT id, username, password, salt FROM user_salt WHERE username = :username');
                 $stmt->execute(array('username' => $userName));
                 $user = $stmt->fetch(PDO::FETCH_ASSOC);
                 if (empty($user)) {
@@ -32,7 +32,7 @@ try{
                         $salt = generateRandomSalt();
                         $hashedPassword = encrypt_decrypt('encrypt', $password, $salt);
                         $hashedSalt = encrypt_decrypt('encrypt', $salt);
-                        $updateQuery = "Update users SET salt = :salt, password = :password where id = :id";
+                        $updateQuery = "Update user_salt SET salt = :salt, password = :password where id = :id";
                         $statement = $connection->prepare($updateQuery);
                         $statement->execute(array('salt' => $hashedSalt, 'password' => $hashedPassword, 'id' => $user['id']));
                         $_SESSION['logged_in'] = $userName;

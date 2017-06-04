@@ -26,7 +26,7 @@ try{
                         $message = "<p class='error'>Password length should be 6-20 characters and contain at-least one digit, upper or lowercase letter and at-least one special character.</p>";
                     } else {
                         $repeat = '';
-                        $query = "select * from users where username = '$username' or email = '$email'";
+                        $query = "select * from user_salt where username = '$username' or email = '$email'";
                         $users = $connection->query($query);
 
                         foreach ($users as $user) {
@@ -42,7 +42,7 @@ try{
                             $salt = generateRandomSalt();
                             $hashedPassword = encrypt_decrypt('encrypt', $password, $salt);
                             $hashedSalt = encrypt_decrypt('encrypt', $salt);
-                            $insertQuery = "INSERT INTO users (name, username, email, password, salt) VALUES  (:name, :username, :email, :password, :salt)";
+                            $insertQuery = "INSERT INTO user_salt (name, username, email, password, salt) VALUES  (:name, :username, :email, :password, :salt)";
                             $statement = $connection->prepare($insertQuery);
                             $result = $statement->execute(array('name' => $name, 'username' => $username, 'email' => $email, 'password' => $hashedPassword, 'salt' => $hashedSalt));
                             if (!$result) {

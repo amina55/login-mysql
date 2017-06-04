@@ -1,11 +1,11 @@
 <?php
-$dbuser = 'root';
+$dbuser = 'Mac';
 $dbpass = 'root';
 $dbhost = 'localhost';
-$dbname='test';
+$dbname='srinagarhc';
 
 try {
-    $connection = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
+    $connection = new PDO("pgsql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
     $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
 catch(PDOException $e)
